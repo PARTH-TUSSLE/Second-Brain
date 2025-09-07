@@ -2,7 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import "dotenv/config"
-import { main, userModel } from "./db.js";
+import { ContentModel, main, userModel } from "./db.js";
+import { UserMiddleware } from "./middleware.js";
 
 const app = express();
 
@@ -68,11 +69,75 @@ try {
 
 });
 
-app.post("/api/v1/content", (req, res) => {});
+app.post("/api/v1/content", UserMiddleware, async (req, res) => {
 
-app.get("/api/v1/content", (req, res) => {});
+const { link, title } = req.body;
 
-app.delete("/api/v1/content", (req, res) => {});
+try {
+  const Content = await ContentModel.create({
+    title,
+    link,
+    //@ts-ignore
+    userId: req.userId,
+    tags: [],
+  });
+
+  res.json({
+    msg: "Content added successfully!",
+    Content
+  })
+
+} catch (error) {
+  res.status(500).json({
+    msg: "Some error occured!",
+  });
+}
+
+});
+
+app.get("/api/v1/content",UserMiddleware, async (req, res) => {
+  //@ts-ignore
+  const userId = req.userId;
+
+  try {
+      const Content = await ContentModel.find({
+        userId: userId,
+      }).populate("userId", "username")
+
+      res.status(200).json({
+        Content
+      })
+
+  } catch (error) {
+    res.status(400).json({
+      msg: "Something went wrong!"
+    })
+  }
+
+  
+});
+
+app.delete("/api/v1/content",UserMiddleware, async (req, res) => {
+  const contentId = req.body.contentId;
+
+  try {
+    const deletedContent = await ContentModel.deleteMany({
+      _id: contentId,
+      //@ts-ignore
+      userId: req.userId,
+    });
+
+    res.json({
+      msg: "Content deleted successfully! ",
+      deletedContent
+    })
+
+  } catch (error) {
+    res.status(400).json({
+      msg: "Something went wrong!"
+    })
+  }
+});
 
 app.post("/api/v1/brain/share", (req, res) => {});
 
