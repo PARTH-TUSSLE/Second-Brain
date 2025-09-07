@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { type ReactElement } from 'react'
 
   interface ButtonProps {
-  variant: "primary" | "secondary";
-  size: "sm" | "md" | "lg";
-  text: string,
-  startIcon?: any;
-  endIcon?: any;
-  onClick?: () => void
-}
+    variant: "primary" | "secondary";
+    size: "sm" | "md" | "lg";
+    text: string;
+    startIcon?: ReactElement;
+    endIcon?: ReactElement;
+    onClick?: () => void;
+  }
 
 const VariantStyles = {
   primary: "bg-violet-500 text-white m-4",
@@ -31,7 +31,7 @@ function Button(props: ButtonProps) {
     >
       {props.startIcon? <div className='pr-2' >{props.startIcon}</div> : null}
       {props.text}
-      {props.endIcon}
+      {props.endIcon? <div className='pl-2' >{props.endIcon}</div>: null}
     </button>
   );
 }
