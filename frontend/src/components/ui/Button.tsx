@@ -7,6 +7,8 @@ import React, { type ReactElement } from 'react'
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     onClick?: () => void;
+    fullWidth?: boolean;
+    loading?:  boolean;
   }
 
 const VariantStyles = {
@@ -28,7 +30,7 @@ function Button(props: ButtonProps) {
       onClick={props.onClick}
       className={`${VariantStyles[props.variant]} ${defaultStyle} ${
         sizeStyles[props.size]
-      } cursor-pointer hover:opacity-80 transition-all duration-200`}
+      } cursor-pointer hover:opacity-80 transition-all duration-200 ${props.fullWidth? " w-full flex justify-center items-center" : ""} ${ props.loading? " disabled opacity-50 ": "" } `}
     >
       {props.startIcon? <div className='pr-2' >{props.startIcon}</div> : null}
       {props.text}
