@@ -28,7 +28,7 @@ function Button(props: ButtonProps) {
       onClick={props.onClick}
       className={`${VariantStyles[props.variant]} ${defaultStyle} ${
         sizeStyles[props.size]
-      } cursor-pointer`}
+      } cursor-pointer hover:opacity-80 transition-all duration-200`}
     >
       {props.startIcon? <div className='pr-2' >{props.startIcon}</div> : null}
       {props.text}
