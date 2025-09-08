@@ -6,10 +6,12 @@ import { ContentModel, LinkModel, main, userModel, } from "./db.js";
 import { TagModel } from "./db.js";
 import { UserMiddleware } from "./middleware.js";
 import { random } from "./utils.js";
+import cors from "cors"; 
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Chal hatt behen ki lodi");
@@ -54,8 +56,7 @@ app.post("/api/v1/signin", async (req, res) => {
 
       res.json({
         msg: "User signedIn successfully!",
-        token: token,
-        user: user,
+        token: token
       });
     } else {
       res.json({

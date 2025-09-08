@@ -1,16 +1,16 @@
 import React from 'react';
 
-function InputBox({ onChange, placeholder, type }: {
-  onChange: () => void,
+function InputBox({ reference, placeholder, type }: {
+  reference: any
   placeholder: string,
   type: string
 }) {
   return (
     <div>
       <input
+        ref={reference}
         className="px-4 py-2 border rounded-md "
         placeholder={placeholder}
-        onChange={onChange}
         type={type}
       />
       
