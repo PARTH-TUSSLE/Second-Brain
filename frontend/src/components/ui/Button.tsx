@@ -10,7 +10,7 @@ import React, { type ReactElement } from 'react'
   }
 
 const VariantStyles = {
-  primary: "bg-violet-500 text-white m-4",
+  primary: "bg-violet-500 text-white",
   secondary: "bg-violet-200 text-violet-500",
 };
 
@@ -25,9 +25,10 @@ const defaultStyle = "rounded-md font-bold flex"
 function Button(props: ButtonProps) {
   return (
     <button
+      onClick={props.onClick}
       className={`${VariantStyles[props.variant]} ${defaultStyle} ${
         sizeStyles[props.size]
-      } `}
+      } cursor-pointer`}
     >
       {props.startIcon? <div className='pr-2' >{props.startIcon}</div> : null}
       {props.text}
