@@ -1,7 +1,7 @@
 import React from 'react';
 
 function InputBox({ reference, placeholder, type }: {
-  reference: any
+  reference?: any
   placeholder: string,
   type: string
 }) {

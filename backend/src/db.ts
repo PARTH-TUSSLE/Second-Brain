@@ -24,9 +24,10 @@ export const TagModel = mongoose.model("Tag", TagSchema);
 const ContentSchema = new Schema({
   title: { type: String },
   link: { type: String },
+  type: { type: String },
   tags: [{ type: mongoose.Types.ObjectId, ref: "Tag" }],
   userId: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
-});
+}); 
 
 const LinkSchema = new Schema({
   hash: { type: String },

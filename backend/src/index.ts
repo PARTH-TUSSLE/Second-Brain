@@ -69,7 +69,7 @@ app.post("/api/v1/signin", async (req, res) => {
 });
 
 app.post("/api/v1/content", UserMiddleware, async (req, res) => {
-  const { link, title, tags } = req.body;
+  const { link, title, tags, type } = req.body;
 
   try {
     let tagIds = [];
@@ -86,6 +86,7 @@ app.post("/api/v1/content", UserMiddleware, async (req, res) => {
     const Content = await ContentModel.create({
       title,
       link,
+      type,
       //@ts-ignore
       userId: req.userId,
       tags: tagIds,
