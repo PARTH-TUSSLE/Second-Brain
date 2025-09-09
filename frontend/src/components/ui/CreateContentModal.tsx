@@ -34,6 +34,7 @@ function CreateContentModal({ open, onClose }: CreateContentModalProps) {
       }
     })
       alert("Content added successfully!");
+      onClose();
   }
 
   return (
