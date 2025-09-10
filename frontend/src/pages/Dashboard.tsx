@@ -14,14 +14,18 @@ function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const contents = UseContent();
 
-  async function shareBrain () {
-    const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
-      share: true
-    }, {
-      headers: {
-        "Authorization": localStorage.getItem("token")
+  async function shareBrain() {
+    const response = await axios.post(
+      `${BACKEND_URL}/api/v1/brain/share`,
+      {
+        share: true,
+      },
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
       }
-    }) ;
+    );
     const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
     alert(shareUrl);
   }
@@ -48,7 +52,7 @@ function Dashboard() {
               startIcon={<PlusIcon variant="md" />}
             />
             <Button
-              onClick={ shareBrain}
+              onClick={shareBrain}
               variant="secondary"
               text="Share Brain"
               size="sm"
@@ -57,7 +61,9 @@ function Dashboard() {
           </div>
 
           <div className="flex gap-4 flex-wrap">
-            {contents.map(({ title, type, link }) => <Card title={title} link={link} type={type} /> )}
+            {contents.map(({ title, type, link }) => (
+              <Card title={title} link={link} type={type} />
+            ))}
           </div>
         </div>
       </div>
